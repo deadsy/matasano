@@ -1,8 +1,12 @@
 package main
 
-import (
-  "fmt"
-)
+// min()
+func min (a int, b int) int {
+  if a <= b {
+    return a
+  }
+  return b
+}
 
 // convert to lower case character
 func tolower(x byte) byte {
@@ -141,25 +145,11 @@ func base64_to_bin(s string) []byte {
   return b
 }
 
-const input = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
-const output = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
-
-const in1 = "pleasure." //  Encodes to: cGxlYXN1cmUu
-const in2 = "leasure."  //  Encodes to: bGVhc3VyZS4=
-const in3 = "easure."   //  Encodes to: ZWFzdXJlLg==
-const in4 = "asure."    //  Encodes to:     YXN1cmUu
-const in5 = "sure."     //  Encodes to:     c3VyZS4=
-
-func main() {
-  var s string
-  for _, s = range []string {in1, in2, in3, in4, in5} {
-    var x string
-    var y []byte
-    x = bin_to_base64([]byte(s))
-    y = base64_to_bin(x)
-    fmt.Printf("base64 %s bin %s\n", x, y)
+func xor_bin(a []byte, b []byte) []byte {
+  n := min(len(a), len(b))
+  c := make([]byte, n)
+  for i := 0; i < n; i ++ {
+    c[i] = a[i] ^ b[i]
   }
-
-  s = bin_to_base64(hex_to_bin(input))
-  fmt.Println(s == output)
+  return c
 }
