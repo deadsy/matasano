@@ -1,8 +1,4 @@
-package main
-
-import (
-  "fmt"
-)
+package lib
 
 // convert to lower case character
 func tolower(x uint8) uint8 {
@@ -29,7 +25,7 @@ func uint4_to_hex(x uint8) uint8 {
   return hex[x & 15]
 }
 
-func bin2hex(b []uint8) string {
+func Bin2Hex(b []uint8) string {
   s := make([]uint8, len(b) << 1)
   for i := 0; i < len(b); i ++ {
     s[i*2] = uint4_to_hex(b[i] >> 4)
@@ -38,7 +34,7 @@ func bin2hex(b []uint8) string {
   return string(s)
 }
 
-func hex2bin(s string) []byte {
+func Hex2Bin(s string) []byte {
   b := make([]byte, (len(s) + 1) >> 1 )
   for i := 0; i < len(s); i++ {
     b[i/2] <<= 4
@@ -72,7 +68,7 @@ func base64_to_uint6(x uint8) uint8 {
   return 0
 }
 
-func bin2base64(b []uint8) string {
+func Bin2Base64(b []uint8) string {
 
   var s []uint8
 
@@ -102,16 +98,11 @@ func bin2base64(b []uint8) string {
   return string(s)
 }
 
-const input = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
-const output = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
-
-func main() {
-
-  x := hex2bin(input)
-  fmt.Printf("%s\n", bin2hex(x))
-
-  y := bin2base64(x)
-  fmt.Printf("%s\n", y)
-
-  fmt.Println(y == output)
+// xor binary streams
+func Xor(a []byte, b []byte) []byte {
+  c := make([]byte, len(a))
+  for i := 0; i < len(a); i ++ {
+    c[i] = a[i] ^ b[i]
+  }
+  return c
 }
