@@ -111,6 +111,14 @@ func Xor(a []byte, b []byte) []byte {
   return c
 }
 
+func Xor_Byte(a []byte, c byte) []byte {
+  b := make([]byte, len(a))
+  for i := 0; i < len(a); i ++ {
+    b[i] = a[i] ^ c
+  }
+  return b
+}
+
 func Bin2Ascii(b []uint8) string {
   s := make([]byte, len(b))
   for i := 0; i < len(b); i ++ {
